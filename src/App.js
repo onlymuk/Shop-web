@@ -14,7 +14,9 @@ function App() {
       <Common />
       <Routes>
         <Route path="/" element={<MainPage shoes={shoes} />} />
-        <Route path="/detail" element={<Detail />} />
+
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<div>이벤트1!</div>} />
           <Route path="two" element={<div>이벤트2!</div>} />
