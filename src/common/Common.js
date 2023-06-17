@@ -21,7 +21,15 @@ const Common = () => {
               navigate("/detail");
             }}
           >
-            Features
+            Detail
+          </Nav.Link>
+          <div className="space"></div>
+          <Nav.Link
+            onClick={() => {
+              navigate("/cart");
+            }}
+          >
+            Cart
           </Nav.Link>
         </Nav>
       </Container>

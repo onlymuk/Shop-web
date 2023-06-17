@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store";
+
 const Detail = (props) => {
-  let [alert, setAlert] = useState(true);
-  let [tab, setTab] = useState(0);
-  let [num, setNum] = useState("");
-  let [fade2, setFade2] = useState("");
+  const dispatch = useDispatch();
+  const [alert, setAlert] = useState(true);
+  const [tab, setTab] = useState(0);
+  const [num, setNum] = useState("");
+  const [fade2, setFade2] = useState("");
 
   useEffect(() => {
     setFade2("end");
@@ -13,10 +17,11 @@ const Detail = (props) => {
       setFade2("");
     };
   }, []);
+
   useEffect(() => {
-    let a = setTimeout(() => setAlert(false), 2000);
+    const timeout = setTimeout(() => setAlert(false), 2000);
     return () => {
-      clearTimeout(a);
+      clearTimeout(timeout);
     };
   }, []);
 
@@ -26,17 +31,17 @@ const Detail = (props) => {
     }
   }, [num]);
 
-  let { id } = useParams();
-  let findItem = props.shoes.find((x) => {
-    return x.id === parseInt(id);
-  });
+  const { id } = useParams();
+  const findItem = props.shoes.find((x) => x.id === parseInt(id));
+
+  const handleAddToCart = () => {
+    dispatch(addItem({ id: findItem.id, name: findItem.title, count: 1 }));
+  };
+
+  console.log({ id: findItem.id, title: findItem.title, count: 1 });
   return (
     <div className={"container start " + fade2}>
-      <input
-        onChange={(e) => {
-          setNum(e.target.value);
-        }}
-      />
+      <input onChange={(e) => setNum(e.target.value)} />
       {alert && (
         <div className="alert alert-warning">2초 이내 구매 시 할인</div>
       )}
@@ -54,7 +59,9 @@ const Detail = (props) => {
           <h4 className="pt-5">{findItem.title}</h4>
           <p>{findItem.content}</p>
           <p>1{findItem.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={handleAddToCart}>
+            주문하기
+          </button>
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
@@ -95,31 +102,21 @@ const Detail = (props) => {
 };
 
 function TabContent({ tab }) {
-  // if (props.tab === 0) {
-  //   return <div>내용0</div>;
-  // }
-  // if (props.tab === 1) {
-  //   return <div>내용1</div>;
-  // }
-  // if (props.tab === 2) {
-  //   return <div>내용2</div>;
-  // }
+  const [fade, setFade] = useState("");
 
-  let [fade, setFade] = useState("");
   useEffect(() => {
-    let a = setTimeout(() => {
+    const timeout = setTimeout(() => {
       setFade("end");
     }, 200);
     return () => {
-      clearTimeout(a);
+      clearTimeout(timeout);
       setFade("");
     };
   }, [tab]);
-  return (
-    <div className={`start ${fade}`}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
-    </div>
-  );
+
+  const content = ["내용0", "내용1", "내용2"];
+
+  return <div className={`start ${fade}`}>{content[tab]}</div>;
 }
 
 export default Detail;
