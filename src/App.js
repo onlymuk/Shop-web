@@ -6,9 +6,11 @@ import Detail from "./components/Detail";
 import MainPage from "./components/Main";
 import Common from "./common/Common";
 import Event from "./components/Event";
+import Cart from "./components/Cart";
 
 function App() {
   let [shoes] = useState(data);
+
   return (
     <div className="App">
       <Common />
@@ -16,7 +18,7 @@ function App() {
         <Route path="/" element={<MainPage shoes={shoes} />} />
 
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
-
+        <Route path="/cart" element={<Cart></Cart>} />
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<div>이벤트1!</div>} />
           <Route path="two" element={<div>이벤트2!</div>} />
