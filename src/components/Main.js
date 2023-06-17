@@ -58,11 +58,7 @@ function MainPage(props) {
       <div className="container">
         <div className="row">
           {props.shoes.map((_, i) => {
-            return (
-              <button className="card-btn">
-                <Card shoes={props.shoes[i]} key={i}></Card>;
-              </button>
-            );
+            return <Card shoes={props.shoes[i]} key={i}></Card>;
           })}
         </div>
       </div>

@@ -9,11 +9,7 @@
   transition:  opacity 0.5s;
 }
 
-.card-btn {
-  border: none;
-  background: inherit;
-  cursor: pointer;
-}
+
 
 .App {
   text-align: center;
