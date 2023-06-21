@@ -6,23 +6,14 @@ const Common = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">P-Siri</Navbar.Brand>
+        <Nav.Link
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <Navbar.Brand href="#home">P-Siri</Navbar.Brand>
+        </Nav.Link>
         <Nav className="me-auto">
-          <Nav.Link
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Home{" "}
-          </Nav.Link>
-          <div className="space"></div>
-          <Nav.Link
-            onClick={() => {
-              navigate("/detail");
-            }}
-          >
-            Detail
-          </Nav.Link>
           <div className="space"></div>
           <Nav.Link
             onClick={() => {

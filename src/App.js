@@ -1,6 +1,6 @@
 import "./App.css";
 import data from "./common/data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Detail from "./components/Detail";
 import MainPage from "./components/Main";
@@ -9,6 +9,9 @@ import Event from "./components/Event";
 import Cart from "./components/Cart";
 
 function App() {
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
   let [shoes] = useState(data);
 
   return (

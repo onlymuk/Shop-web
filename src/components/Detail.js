@@ -10,6 +10,17 @@ const Detail = (props) => {
   const [tab, setTab] = useState(0);
   const [num, setNum] = useState("");
   const [fade2, setFade2] = useState("");
+  const { id } = useParams();
+  const findItem = props.shoes.find((x) => x.id === parseInt(id));
+
+  useEffect(() => {
+    let 꺼낸거 = localStorage.getItem("watched");
+    꺼낸거 = JSON.parse(꺼낸거);
+    꺼낸거.push(findItem.id);
+    꺼낸거 = new Set(꺼낸거);
+    꺼낸거 = Array.from(꺼낸거);
+    localStorage.setItem("watched", JSON.stringify(꺼낸거));
+  }, []);
 
   useEffect(() => {
     setFade2("end");
@@ -30,9 +41,6 @@ const Detail = (props) => {
       window.alert("숫자 아님");
     }
   }, [num]);
-
-  const { id } = useParams();
-  const findItem = props.shoes.find((x) => x.id === parseInt(id));
 
   const handleAddToCart = () => {
     dispatch(addItem({ id: findItem.id, name: findItem.title, count: 1 }));
